@@ -26,6 +26,24 @@ function groupByClan(members: CrewMember[]): Record<string, CrewMember[]> {
   return groups
 }
 
+const CLAN_ORDER = [
+  "Patriarch & Matriarch",
+  "Heering's of Plainville",
+  "Heering's of Southbury",
+  "Dunn's",
+]
+
+function sortedClanEntries(clans: Record<string, CrewMember[]>): [string, CrewMember[]][] {
+  return Object.entries(clans).sort(([a], [b]) => {
+    const ai = CLAN_ORDER.indexOf(a)
+    const bi = CLAN_ORDER.indexOf(b)
+    if (ai === -1 && bi === -1) return a.localeCompare(b)
+    if (ai === -1) return 1
+    if (bi === -1) return -1
+    return ai - bi
+  })
+}
+
 export default async function CrewPage() {
   const crew = await getCrew()
   const clans = groupByClan(crew)
@@ -55,7 +73,7 @@ export default async function CrewPage() {
           <EmptyState message="No crew members yet. Add rows to the crew table in Supabase." />
         ) : (
           <div className="space-y-10">
-            {Object.entries(clans).map(([clan, members]) => (
+            {sortedClanEntries(clans).map(([clan, members]) => (
               <section key={clan}>
                 <h2 className="text-2xl font-bold text-blue-600 text-center mb-6">
                   {clan}
