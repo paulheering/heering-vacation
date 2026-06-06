@@ -40,26 +40,28 @@ export default async function GamesPage() {
             <p className="text-gray-500">No games added yet.</p>
           </div>
         ) : (
-          games.map((game) => (
-            <div key={game.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-              <div className="p-6 pb-4">
-                <h2 className="text-2xl font-bold text-gray-800">{game.name}</h2>
-              </div>
-              {game.photo && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={game.photo}
-                  alt={game.name ?? ''}
-                  className="w-full h-56 object-cover"
-                />
-              )}
-              {game.description && (
-                <div className="p-6 pt-4">
-                  <p className="text-gray-600 leading-relaxed">{game.description}</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {games.map((game) => (
+              <div key={game.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 flex flex-col">
+                <div className="p-4 pb-2">
+                  <h2 className="text-lg font-bold text-gray-800 leading-tight">{game.name}</h2>
                 </div>
-              )}
-            </div>
-          ))
+                {game.photo && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={game.photo}
+                    alt={game.name ?? ''}
+                    className="w-full aspect-square object-cover"
+                  />
+                )}
+                {game.description && (
+                  <div className="p-4 pt-3">
+                    <p className="text-gray-500 text-sm leading-relaxed">{game.description}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
