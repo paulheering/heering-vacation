@@ -1,0 +1,13 @@
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
+
+export const supabase = createClient(supabaseUrl, supabaseKey)
+export const isConfigured = Boolean(
+  supabaseUrl &&
+  supabaseKey &&
+  supabaseUrl.startsWith('https://') &&
+  !supabaseUrl.includes('your-project-id') &&
+  !supabaseKey.includes('your-anon-key')
+)
