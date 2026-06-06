@@ -118,14 +118,14 @@ export default async function Home() {
   ]
 
   return (
-    <div className="min-h-screen px-4 py-12 sm:py-16">
-      <div className="max-w-2xl mx-auto">
-        <header className="text-center mb-10 sm:mb-14">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight">
-            Heering Family<br className="sm:hidden" /> Vacation
-          </h1>
-        </header>
+    <div className="min-h-screen">
+      <header className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 px-4 py-12 sm:py-16 text-center">
+        <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight">
+          Heering Family<br className="sm:hidden" /> Vacation
+        </h1>
+      </header>
 
+      <div className="max-w-2xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {cards.map((card, i) => {
             const Icon = card.Icon
@@ -156,4 +156,5 @@ export default async function Home() {
       </div>
     </div>
   )
+
 }

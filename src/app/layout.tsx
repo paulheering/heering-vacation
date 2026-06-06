@@ -15,7 +15,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
-      <body className="min-h-full bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900">
+      <body className="min-h-full bg-gray-50">
         {children}
       </body>
     </html>

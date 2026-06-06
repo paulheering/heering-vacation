@@ -31,21 +31,24 @@ export default async function CrewPage() {
   const clans = groupByClan(crew)
 
   return (
-    <div className="min-h-screen px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-blue-200 hover:text-white transition-colors mb-8 text-sm font-medium"
-        >
-          <IconArrowLeft size={16} />
-          Home
-        </Link>
+    <div className="min-h-screen">
+      <header className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-blue-200 hover:text-white transition-colors mb-4 text-sm font-medium"
+          >
+            <IconArrowLeft size={16} />
+            Home
+          </Link>
+          <h1 className="text-3xl sm:text-4xl font-bold text-white flex items-center gap-3">
+            <IconUsers size={36} />
+            The Crew
+          </h1>
+        </div>
+      </header>
 
-        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-          <IconUsers size={36} />
-          The Crew
-        </h1>
-
+      <div className="max-w-4xl mx-auto px-4 py-8">
         {!isConfigured ? (
           <EmptyState message="Configure Supabase to see crew members." />
         ) : crew.length === 0 ? (
@@ -54,7 +57,7 @@ export default async function CrewPage() {
           <div className="space-y-10">
             {Object.entries(clans).map(([clan, members]) => (
               <section key={clan}>
-                <h2 className="text-xs font-semibold text-blue-300 uppercase tracking-widest mb-4">
+                <h2 className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-4">
                   {clan}
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
@@ -71,11 +74,12 @@ export default async function CrewPage() {
   )
 }
 
+
 function EmptyState({ message }: { message: string }) {
   return (
-    <div className="bg-white/10 rounded-2xl p-10 text-center">
+    <div className="bg-white rounded-2xl p-10 text-center shadow-sm border border-gray-100">
       <IconUsers size={48} className="mx-auto mb-3 text-blue-300" />
-      <p className="text-blue-100">{message}</p>
+      <p className="text-gray-500">{message}</p>
     </div>
   )
 }
