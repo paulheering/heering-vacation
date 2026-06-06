@@ -57,10 +57,10 @@ export default async function CrewPage() {
           <div className="space-y-10">
             {Object.entries(clans).map(([clan, members]) => (
               <section key={clan}>
-                <h2 className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-4">
+                <h2 className="text-2xl font-bold text-blue-600 text-center mb-6">
                   {clan}
                 </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <div className="flex flex-wrap justify-center gap-6">
                   {members.map((member) => (
                     <MemberCard key={member.id} member={member} />
                   ))}
@@ -86,9 +86,9 @@ function EmptyState({ message }: { message: string }) {
 
 function MemberCard({ member }: { member: CrewMember }) {
   return (
-    <div className="bg-white rounded-2xl p-5 text-center shadow-md">
+    <div className="text-center w-28">
       {member.photo ? (
-        <div className="relative w-20 h-20 rounded-full overflow-hidden mx-auto mb-3 ring-4 ring-blue-100">
+        <div className="relative w-20 h-20 rounded-full overflow-hidden mx-auto mb-3">
           <Image src={member.photo} alt={member.name ?? ''} fill className="object-cover" />
         </div>
       ) : (
@@ -96,7 +96,7 @@ function MemberCard({ member }: { member: CrewMember }) {
           {(member.name ?? '?')[0]}
         </div>
       )}
-      <p className="font-semibold text-gray-800 text-sm leading-tight">{member.name ?? '—'}</p>
+      <p className="font-semibold text-gray-800 text-base leading-tight">{member.name ?? '—'}</p>
     </div>
   )
 }
