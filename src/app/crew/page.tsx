@@ -33,6 +33,22 @@ const CLAN_ORDER = [
   "Dunns",
 ]
 
+// Maps each clan to its shield file in the public `clans` bucket.
+// Filenames are taken verbatim from storage (note "Patriach" is the
+// actual uploaded spelling).
+const CLAN_SHIELDS: Record<string, string> = {
+  "Patriarch & Matriarch": "Matriarch and Patriach.jpeg",
+  "Heerings of Plainville": "Heerings of Plainville.jpeg",
+  "Heerings of Southbury": "Heerings of Southbury.jpeg",
+  "Dunns": "Dunns.jpeg",
+}
+
+function shieldUrl(clan: string): string | null {
+  const file = CLAN_SHIELDS[clan]
+  if (!file) return null
+  return supabase.storage.from('clans').getPublicUrl(file).data.publicUrl
+}
+
 function sortedClanEntries(clans: Record<string, CrewMember[]>): [string, CrewMember[]][] {
   return Object.entries(clans).sort(([a], [b]) => {
     const ai = CLAN_ORDER.indexOf(a)
@@ -75,7 +91,15 @@ export default async function CrewPage() {
           <div className="space-y-10">
             {sortedClanEntries(clans).map(([clan, members]) => (
               <section key={clan}>
-                <h2 className="text-2xl font-bold text-blue-600 text-center mb-6">
+                <h2 className="flex items-center justify-center gap-3 text-2xl font-bold text-blue-600 text-center mb-6">
+                  {shieldUrl(clan) && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={shieldUrl(clan)!}
+                      alt={`${clan} shield`}
+                      className="w-12 h-12 object-contain flex-shrink-0"
+                    />
+                  )}
                   {clan}
                 </h2>
                 <div className="flex flex-wrap justify-center gap-6">
