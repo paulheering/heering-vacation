@@ -123,7 +123,7 @@ export default async function Home() {
       ),
     },
     {
-      title: 'What To Do',
+      title: "What's Around",
       href: '/activities',
       Icon: IconListCheck,
       iconBg: 'bg-purple-100',

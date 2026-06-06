@@ -12,7 +12,7 @@ export default function ActivitiesPage() {
           </Link>
           <h1 className="text-3xl sm:text-4xl font-bold text-white flex items-center gap-3">
             <IconListCheck size={36} />
-            What To Do
+            What's Around
           </h1>
         </div>
       </header>
