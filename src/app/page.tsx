@@ -9,7 +9,7 @@ import {
   IconTrophy,
 } from '@tabler/icons-react'
 import { supabase, isConfigured } from '@/lib/supabase'
-import type { CrewMember } from '@/lib/types'
+import type { CrewMember, Destination } from '@/lib/types'
 
 export const dynamic = 'force-dynamic'
 
@@ -22,6 +22,16 @@ interface CardData {
   iconBg: string
   iconColor: string
   preview: React.ReactNode
+}
+
+async function getDestinationPreview(): Promise<Destination | null> {
+  if (!isConfigured) return null
+  try {
+    const { data } = await supabase.from('destination').select('name, address, photo').limit(1).single()
+    return data ?? null
+  } catch {
+    return null
+  }
 }
 
 async function getCrewPreview(): Promise<CrewMember[]> {
@@ -72,7 +82,7 @@ function CrewPreview({ members }: { members: CrewMember[] }) {
 }
 
 export default async function Home() {
-  const crew = await getCrewPreview()
+  const [crew, destination] = await Promise.all([getCrewPreview(), getDestinationPreview()])
 
   const cards: CardData[] = [
     {
@@ -90,11 +100,21 @@ export default async function Home() {
       iconBg: 'bg-green-100',
       iconColor: 'text-green-600',
       preview: (
-        <div className="flex items-start gap-2">
-          <IconMapPin size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
-          <div>
-            <p className="text-sm font-medium text-gray-700 leading-tight">12 Defelice Rd</p>
-            <p className="text-sm text-gray-500 leading-tight">Narragansett, Rhode Island</p>
+        <div>
+          {destination?.photo && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={destination.photo}
+              alt={destination.name ?? 'Destination'}
+              className="w-full h-24 object-cover rounded-xl mb-3"
+            />
+          )}
+          <div className="flex items-start gap-1.5">
+            <IconMapPin size={15} className="text-green-500 mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="text-sm font-medium text-gray-700 leading-tight">12 Defelice Rd</p>
+              <p className="text-sm text-gray-500 leading-tight">Narragansett, Rhode Island</p>
+            </div>
           </div>
         </div>
       ),
