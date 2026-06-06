@@ -37,7 +37,7 @@ async function getDestinationPreview(): Promise<Destination | null> {
 async function getCrewPreview(): Promise<CrewMember[]> {
   if (!isConfigured) return []
   try {
-    const { data } = await supabase.from('crew').select('*').order('name').limit(8)
+    const { data } = await supabase.from('crew').select('*').order('clan').order('name')
     return data ?? []
   } catch {
     return []
@@ -51,32 +51,22 @@ function CrewPreview({ members }: { members: CrewMember[] }) {
   if (members.length === 0) {
     return <p className="text-sm text-gray-400 italic">No crew members yet</p>
   }
-  const shown = members.slice(0, 6)
-  const extra = members.length - 6
   return (
-    <div className="flex items-center gap-1 flex-wrap">
-      {shown.map((m) =>
+    <div className="grid grid-cols-5 gap-2">
+      {members.map((m) =>
         m.photo ? (
-          <div key={m.id} className="relative w-9 h-9 rounded-full overflow-hidden ring-2 ring-white flex-shrink-0">
+          <div key={m.id} className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-white flex-shrink-0">
             <Image src={m.photo} alt={m.name ?? ''} fill className="object-cover" />
           </div>
         ) : (
           <div
             key={m.id}
-            className="w-9 h-9 rounded-full bg-blue-100 ring-2 ring-white flex items-center justify-center text-blue-700 font-bold text-sm flex-shrink-0"
+            className="w-10 h-10 rounded-full bg-blue-100 ring-2 ring-white flex items-center justify-center text-blue-700 font-bold text-sm flex-shrink-0"
           >
             {(m.name ?? '?')[0]}
           </div>
         )
       )}
-      {extra > 0 && (
-        <div className="w-9 h-9 rounded-full bg-gray-100 ring-2 ring-white flex items-center justify-center text-gray-500 text-xs font-semibold flex-shrink-0">
-          +{extra}
-        </div>
-      )}
-      <span className="ml-2 text-sm text-gray-500">
-        {members.length} member{members.length !== 1 ? 's' : ''}
-      </span>
     </div>
   )
 }
