@@ -156,7 +156,11 @@ export default async function Home() {
       Icon: IconTrophy,
       iconBg: 'bg-yellow-100',
       iconColor: 'text-yellow-600',
-      preview: <p className="text-sm text-gray-400 italic">Decathlon standings coming soon</p>,
+      preview: (
+        <p className="text-sm text-gray-500">
+          We will have a series of family challenges to determine the dominant clan.
+        </p>
+      ),
     },
   ]
 
