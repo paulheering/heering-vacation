@@ -34,6 +34,18 @@ async function getDestinationPreview(): Promise<Destination | null> {
   }
 }
 
+async function getAroundCount(): Promise<number> {
+  if (!isConfigured) return 0
+  try {
+    const { count } = await supabase
+      .from('around')
+      .select('*', { count: 'exact', head: true })
+    return count ?? 0
+  } catch {
+    return 0
+  }
+}
+
 async function getCrewPreview(): Promise<CrewMember[]> {
   if (!isConfigured) return []
   try {
@@ -72,7 +84,11 @@ function CrewPreview({ members }: { members: CrewMember[] }) {
 }
 
 export default async function Home() {
-  const [crew, destination] = await Promise.all([getCrewPreview(), getDestinationPreview()])
+  const [crew, destination, aroundCount] = await Promise.all([
+    getCrewPreview(),
+    getDestinationPreview(),
+    getAroundCount(),
+  ])
 
   const cards: CardData[] = [
     {
@@ -128,7 +144,11 @@ export default async function Home() {
       Icon: IconListCheck,
       iconBg: 'bg-purple-100',
       iconColor: 'text-purple-600',
-      preview: <p className="text-sm text-gray-400 italic">Activities TBD</p>,
+      preview: (
+        <p className="text-sm text-gray-500">
+          Links and descriptions for {aroundCount} local shops, restaurants and activities
+        </p>
+      ),
     },
     {
       title: 'Games',
