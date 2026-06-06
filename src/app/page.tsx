@@ -27,7 +27,7 @@ interface CardData {
 async function getDestinationPreview(): Promise<Destination | null> {
   if (!isConfigured) return null
   try {
-    const { data } = await supabase.from('destination').select('name, address, photo').limit(1).single()
+    const { data } = await supabase.from('destination').select('*').limit(1).single()
     return data ?? null
   } catch {
     return null
