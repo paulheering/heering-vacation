@@ -18,6 +18,14 @@ export interface Destination {
   created_at: string
 }
 
+export interface Game {
+  id: number
+  name: string | null
+  description: string | null
+  photo: string | null
+  created_at: string
+}
+
 export interface DestinationPhoto {
   id: number
   destination_id: number
