@@ -9,6 +9,8 @@ import {
 } from '@tabler/icons-react'
 import type { AroundItem } from '@/lib/types'
 
+const HOME_ADDRESS = '12 Defelice Road, Narragansett, RI'
+
 function ListingCard({ item }: { item: AroundItem }) {
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 flex flex-col">
@@ -34,10 +36,17 @@ function ListingCard({ item }: { item: AroundItem }) {
         </div>
 
         {item.address && (
-          <div className="flex items-start gap-1.5 text-gray-500">
-            <IconMapPin size={15} className="mt-0.5 flex-shrink-0 text-gray-400" />
-            <p className="text-sm leading-tight">{item.address}</p>
-          </div>
+          <a
+            href={`https://maps.apple.com/?saddr=${encodeURIComponent(HOME_ADDRESS)}&daddr=${encodeURIComponent(item.address)}&dirflg=d`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-start gap-1.5 text-gray-500 hover:text-blue-600 transition-colors group/addr"
+          >
+            <IconMapPin size={15} className="mt-0.5 flex-shrink-0 text-gray-400 group-hover/addr:text-blue-500" />
+            <p className="text-sm leading-tight underline decoration-gray-300 underline-offset-2 group-hover/addr:decoration-blue-400">
+              {item.address}
+            </p>
+          </a>
         )}
 
         {item.notes && (
