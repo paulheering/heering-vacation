@@ -89,7 +89,15 @@ export default async function Home() {
       Icon: IconMapPin,
       iconBg: 'bg-green-100',
       iconColor: 'text-green-600',
-      preview: <p className="text-sm text-gray-400 italic">Destination TBD</p>,
+      preview: (
+        <div className="flex items-start gap-2">
+          <IconMapPin size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
+          <div>
+            <p className="text-sm font-medium text-gray-700 leading-tight">12 Defelice Rd</p>
+            <p className="text-sm text-gray-500 leading-tight">Narragansett, Rhode Island</p>
+          </div>
+        </div>
+      ),
     },
     {
       title: 'When',
