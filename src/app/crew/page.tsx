@@ -28,9 +28,9 @@ function groupByClan(members: CrewMember[]): Record<string, CrewMember[]> {
 
 const CLAN_ORDER = [
   "Patriarch & Matriarch",
-  "Heering's of Plainville",
-  "Heering's of Southbury",
-  "Dunn's",
+  "Heerings of Plainville",
+  "Heerings of Southbury",
+  "Dunns",
 ]
 
 function sortedClanEntries(clans: Record<string, CrewMember[]>): [string, CrewMember[]][] {
