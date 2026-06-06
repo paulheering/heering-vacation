@@ -3,6 +3,7 @@ import { IconMapPin, IconArrowLeft, IconCalendar, IconExternalLink } from '@tabl
 import { supabase, isConfigured } from '@/lib/supabase'
 import type { Destination, DestinationPhoto } from '@/lib/types'
 import PhotoCarousel from '@/components/PhotoCarousel'
+import Amenities from '@/components/Amenities'
 
 export const dynamic = 'force-dynamic'
 
@@ -101,6 +102,9 @@ export default async function WherePage() {
                 <p className="text-gray-600 leading-relaxed whitespace-pre-line">{destination.description}</p>
               </div>
             )}
+
+            {/* Amenities */}
+            {destination.amenities && <Amenities markdown={destination.amenities} />}
 
             {/* Airbnb link */}
             {destination.airbnb_url && (

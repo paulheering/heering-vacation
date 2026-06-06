@@ -15,6 +15,7 @@ export interface Destination {
   checkin: string | null
   checkout: string | null
   airbnb_url: string | null
+  amenities: string | null
   created_at: string
 }
 
