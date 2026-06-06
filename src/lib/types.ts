@@ -26,6 +26,18 @@ export interface Game {
   created_at: string
 }
 
+export interface AroundItem {
+  id: number
+  created_at: string
+  name: string | null
+  category: string | null
+  url: string | null
+  notes: string | null
+  photo: string | null
+  address: string | null
+  minutes: number | null
+}
+
 export interface DestinationPhoto {
   id: number
   destination_id: number
