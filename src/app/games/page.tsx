@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 async function getGames(): Promise<Game[]> {
   if (!isConfigured) return []
   try {
-    const { data } = await supabase.from('games').select('*').order('created_at')
+    const { data } = await supabase.from('games').select('*').order('display_order')
     return data ?? []
   } catch {
     return []
