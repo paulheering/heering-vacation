@@ -105,7 +105,12 @@ export default async function Home() {
       Icon: IconCalendar,
       iconBg: 'bg-orange-100',
       iconColor: 'text-orange-600',
-      preview: <p className="text-sm text-gray-400 italic">Dates TBD</p>,
+      preview: (
+        <div className="flex items-start gap-2">
+          <IconCalendar size={16} className="text-orange-500 mt-0.5 flex-shrink-0" />
+          <p className="text-sm font-medium text-gray-700">August 1st – August 8th, 2026</p>
+        </div>
+      ),
     },
     {
       title: 'What To Do',

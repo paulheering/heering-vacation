@@ -18,9 +18,9 @@ export default function WhenPage() {
       </header>
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl p-10 text-center shadow-sm border border-gray-100">
-          <IconCalendar size={48} className="mx-auto mb-3 text-orange-400" />
-          <p className="text-gray-800 text-lg font-semibold">Dates TBD</p>
-          <p className="text-gray-500 text-sm mt-2">Travel dates to be announced.</p>
+          <IconCalendar size={48} className="mx-auto mb-4 text-orange-400" />
+          <p className="text-2xl font-bold text-gray-800">August 1st – August 8th, 2026</p>
+          <p className="text-gray-400 text-base mt-4 italic">Dude, what extra information are you looking for</p>
         </div>
       </div>
     </div>
